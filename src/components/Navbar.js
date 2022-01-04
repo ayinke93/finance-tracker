@@ -50,9 +50,9 @@ const Navbar = () => {
 
 						{user && (
 							<>
-								<li className='hello'>hello, {user.displayName}</li>
+								<li className='hello'>Hello, {user.displayName}</li>
 
-								<li className='ready'>ready to go? {user.displayName} </li>
+								<li className='ready'>Ready to go {user.displayName} ? </li>
 
 								<li>
 									<button onClick={logout}>Logout</button>
