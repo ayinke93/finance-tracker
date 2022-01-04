@@ -167,7 +167,7 @@ const Body = styled.div`
 	h1 {
 		text-align: center;
 		@media (max-width: 560px) {
-			font-size: 16px;
+			font-size: 18px;
 		}
 	}
 `;

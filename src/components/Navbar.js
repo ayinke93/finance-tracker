@@ -186,13 +186,6 @@ const Nav = styled.div`
 			display: none;
 		}
 	}
-	.show {
-		transform: translateX(100%);
-	}
-
-	.hide {
-		transform: translateX(0%);
-	}
 `;
 const ImageStyle = styled.div`
 	display: flex;
@@ -204,7 +197,7 @@ const ImageStyle = styled.div`
 		margin-left: 30px;
 		@media (max-width: 560px) {
 			width: 10%;
-			margin-top: 10px;
+			margin-top: 5px;
 			margin-left: 30px;
 		}
 	}

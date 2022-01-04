@@ -57,27 +57,38 @@ const Container = styled.div`
 `;
 
 const LoginForm = styled.form`
-	max-width: 400px;
+	max-width: 300px;
 	margin: 60px auto;
 	padding: 20px;
 	background: #f1f1f1;
 	border-radius: 20px;
-
+	h2 {
+		margin-bottom: 20px;
+		text-align: center;
+	}
 	label {
-		display: block;
-		margin: 30px auto;
+		margin: 30px 0;
 	}
 
 	span {
-		display: block;
-		margin-bottom: 6px;
+		&:before {
+			top: -20%;
+			color: #adadad;
+			text-decoration: none;
+			color: #333;
+			margin-top: 50px;
+		}
 	}
 
 	input {
-		padding: 8px 6px;
+		padding: 0px 5px;
 		font-size: 16px;
-		color: #777;
+		border: none;
 		width: 100%;
+		outline: none;
+		background: none;
+		height: 40px;
+		border-bottom: 2px solid #adadad;
 	}
 
 	button {
@@ -90,6 +101,7 @@ const LoginForm = styled.form`
 		cursor: pointer;
 		font-size: #fff;
 		margin-bottom: 10px;
+		margin-top: 20px;
 		&:hover {
 			background: #1f9751;
 			color: #fff;
