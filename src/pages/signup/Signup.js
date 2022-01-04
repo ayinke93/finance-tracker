@@ -21,7 +21,7 @@ const Signup = () => {
 		<Container>
 			<Body>
 				<div className='title'>
-					<h1>Sign up With MyFinance Tracker To Money Your Expenses Today!</h1>
+					<h1>Sign up With MyFinance Tracker To Track Your Spending Today!</h1>
 				</div>
 				<SignupForm onSubmit={handleClick}>
 					<h1>Sign up</h1>
@@ -45,7 +45,7 @@ const Signup = () => {
 					</label>
 
 					<label>
-						<span>displayName</span>
+						<span>Display Name</span>
 						<input
 							type='text'
 							onChange={(e) => SetdisplayName(e.target.value)}
@@ -85,13 +85,19 @@ const Container = styled.div`
 const SignupForm = styled.form`
 	max-width: 360px;
 	background: #f1f1f1;
-	height: 580px;
+	height: 480px;
 	border-radius: 10px;
-	padding: 80px 40px;
+	padding: 40px 40px;
+	@media (max-width: 560px) {
+		padding: 30px 30px;
+	}
 
 	h1 {
 		text-align: center;
-		margin-bottom: 60px;
+		margin-bottom: 40px;
+		@media (max-width: 560px) {
+			font-size: 10px;
+		}
 	}
 
 	label {
@@ -106,13 +112,11 @@ const SignupForm = styled.form`
 			color: #333;
 			margin-top: 50px;
 		}
-		/* display: block; */
 	}
 
 	input {
 		padding: 0px 5px;
 		font-size: 16px;
-
 		border: none;
 		width: 100%;
 		outline: none;
@@ -131,24 +135,40 @@ const SignupForm = styled.form`
 		cursor: pointer;
 		font-size: #fff;
 		margin-top: 20px;
+		margin-bottom: 10px;
 		&:hover {
 			background: #1f9751;
 			color: #fff;
 		}
+	}
+	a {
+		text-decoration: none;
+		font-weight: bold;
+		cursor: pointer;
+		color: #1f9751;
 	}
 `;
 
 const Body = styled.div`
 	display: flex;
 	flex-direction: row;
-	max-width: 720px;
+	max-width: 600px;
 	background: #f1f1f1;
 	justify-content: center;
 	align-items: center;
-	padding: 40px;
+	padding: 10px;
 	border-radius: 20px;
 	@media (max-width: 560px) {
 		flex-direction: column;
+		max-width: 360px;
+		height: 90vh;
+		padding: 20px;
+	}
+	h1 {
+		text-align: center;
+		@media (max-width: 560px) {
+			font-size: 16px;
+		}
 	}
 `;
 

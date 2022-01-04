@@ -18,7 +18,7 @@ const Login = () => {
 			<LoginForm onSubmit={handleSubmit}>
 				<h2>Login</h2>
 				<label>
-					<span>email:</span>
+					<span>Email:</span>
 					<input
 						type='email'
 						onChange={(e) => setEmail(e.target.value)}
@@ -26,7 +26,7 @@ const Login = () => {
 					/>
 				</label>
 				<label>
-					<span>password:</span>
+					<span>Password:</span>
 					<input
 						type='password'
 						onChange={(e) => setPassword(e.target.value)}
@@ -37,7 +37,7 @@ const Login = () => {
 				{isPending && <button disabled>loading</button>}
 				{error && <p>{error}</p>}
 				<div>
-					don't have an account yet?, <Link to='/signup'>signup</Link>
+					don't have an account yet? <Link to='/signup'>signup</Link>
 				</div>
 			</LoginForm>
 		</Container>
@@ -89,10 +89,17 @@ const LoginForm = styled.form`
 		font-weight: bold;
 		cursor: pointer;
 		font-size: #fff;
+		margin-bottom: 10px;
 		&:hover {
 			background: #1f9751;
 			color: #fff;
 		}
+	}
+	a {
+		text-decoration: none;
+		font-weight: bold;
+		cursor: pointer;
+		color: #1f9751;
 	}
 `;
 

@@ -4,70 +4,89 @@ import { useLogout } from '../hooks/useLogout';
 import { useAuthContext } from '../hooks/useAuthContext';
 import Logo from '../assets/Logo.png';
 import Menu from '../assets/MenuImage.svg';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Navbar = () => {
 	const { logout } = useLogout();
 	const { user } = useAuthContext();
+	const [showMenu, setShowMenu] = useState(false);
+	const [isDesktop, setDesktop] = useState(window.innerWidth > 560);
 
-	const inActive = {
-		display: 'hide',
+	const updateMedia = () => {
+		setDesktop(window.innerWidth > 560);
 	};
-
-	const active = {
-		display: 'show',
-	};
-
-	const [visible, setVisible] = useState(inActive);
-
-	const toggleClass = () => {
-		if (visible.display === 'hide') {
-			setVisible(active);
-		} else {
-			setVisible(inActive);
-		}
-	};
+	useEffect(() => {
+		window.addEventListener('resize', updateMedia);
+		return () => window.removeEventListener('resize', updateMedia);
+	});
 
 	return (
 		<>
 			<ImageStyle>
 				<img src={Logo} alt='logo' />
-				{/* {<p>hello, {user.displayName}</p>} */}
+				{<p>hello, {user.displayName}</p>}
 			</ImageStyle>
 
-			<Menubutton className='mobile-nav-toggle' onClick={toggleClass}>
+			<Menubutton
+				className='mobile-nav-toggle'
+				onClick={() => setShowMenu(!showMenu)}
+			>
 				<img src={Menu} alt='menu' />
 			</Menubutton>
-			<Nav>
-				<ul className={visible.display}>
-					{/* <li className='title'>myMoney</li> */}
 
-					{!user && (
-						<>
-							<li>
-								<Link to='/login'>Login</Link>
-							</li>
-							<li>
-								<Link to='/signup'>Signup</Link>
-							</li>
-						</>
-					)}
+			{showMenu && (
+				<Nav>
+					<ul>
+						{!user && (
+							<>
+								<li>
+									<Link to='/login'>Login</Link>
+								</li>
+								<li>
+									<Link to='/signup'>Signup</Link>
+								</li>
+							</>
+						)}
 
-					{user && (
-						<>
-							{/* {user.displayName && (
+						{user && (
+							<>
 								<li className='hello'>hello, {user.displayName}</li>
-							)}
-							{user.displayName && (
-								<li className='ready'>ready to go, {user.displayName} </li>
-							)} */}
-							<li>
-								<button onClick={logout}>Logout</button>
-							</li>
-						</>
-					)}
-				</ul>
-			</Nav>
+
+								<li className='ready'>ready to go? {user.displayName} </li>
+
+								<li>
+									<button onClick={logout}>Logout</button>
+								</li>
+							</>
+						)}
+					</ul>
+				</Nav>
+			)}
+			{isDesktop && (
+				<Nav>
+					<ul>
+						{!user && (
+							<>
+								<li>
+									<Link to='/login'>Login</Link>
+								</li>
+								<li>
+									<Link to='/signup'>Signup</Link>
+								</li>
+							</>
+						)}
+
+						{user && (
+							<>
+								<li className='hello'>hello, {user.displayName}</li>
+								<li>
+									<button onClick={logout}>Logout</button>
+								</li>
+							</>
+						)}
+					</ul>
+				</Nav>
+			)}
 		</>
 	);
 };
@@ -96,30 +115,18 @@ const Nav = styled.div`
 			gap: 32px;
 			height: 100vh;
 			z-index: 1000;
-			display: none;
-			transform: translateX(100%);
 		}
 		display: flex;
-		/* margin: 0 auto; */
 		max-width: 960px;
 		background: hsl(0 0% 100% /0.5);
 		position: absolute;
 		right: 30px;
-		/* padding: 80px; */
-		/* top: 30px; */
 
 		@supports (backdrop-filter: blur(16px)) {
 			background: hsl(0 0% 100% /0.1);
 			backdrop-filter: blur(16px);
 		}
-		/* [data-visible='true'] {
-			transform: translateX(100%);
-		} */
 	}
-
-	/* ul .notVisible {
-		transform: translateX(0);
-	} */
 
 	li {
 		list-style-type: none;
@@ -159,6 +166,8 @@ const Nav = styled.div`
 		font-weight: bold;
 		cursor: pointer;
 		font-size: #fff;
+		margin-left: 20px;
+
 		&:hover {
 			background: #1f9751;
 			color: #fff;
@@ -169,7 +178,6 @@ const Nav = styled.div`
 		@media (max-width: 560px) {
 			display: block;
 			font-size: 14px;
-			/* margin-bottom: 30px; */
 		}
 	}
 	.hello {
@@ -189,7 +197,6 @@ const Nav = styled.div`
 const ImageStyle = styled.div`
 	display: flex;
 	align-items: center;
-	/* justify-content: center; */
 	img {
 		width: 3%;
 		position: absolute;
@@ -204,7 +211,7 @@ const ImageStyle = styled.div`
 	p {
 		@media (max-width: 560px) {
 			display: inline;
-			margin-left: 110px;
+			margin-left: 200px;
 			margin-top: 25px;
 		}
 		display: none;
@@ -217,7 +224,6 @@ const Menubutton = styled.button`
 		position: absolute;
 		background: url('../assets/MenuImage.svg');
 		width: 16px;
-		/* aspect-ratio: 1; */
 		top: 22px;
 		right: 8px;
 		z-index: 9999;
